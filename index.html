@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Typing Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme">
+
+<button class="language-toggle" onclick="toggleInterfaceLanguage()">ru</button>
+<button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+<div class="container">
+    <div class="heading">Speed Typing Test</div>
+
+    <div class="settings">
+        <label for="language">Language:</label>
+        <select id="language" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+        </select>
+
+        <label for="time">Time:</label>
+        <select id="time" onchange="changeTime()">
+            <option value="15">15s</option>
+            <option value="30" selected>30s</option>
+            <option value="60">60s</option>
+        </select>
+    </div>
+
+    <!-- Модальное окно результатов -->
+    <div id="endGameModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+            <h2>🎉 Game Over! 🎉</h2>
+            <div class="results">
+                <p>Your WPM: <span id="wpmResult" class="result-value"></span></p>
+                <p>Accuracy: <span id="accuracyResult" class="result-value"></span></p>
+                <p>Errors: <span id="errorsResult" class="result-value"></span></p>
+            </div>
+            <div class="share-buttons">
+                <p>Share your results:</p>
+                <a href="#" id="shareTwitter" target="_blank" class="share-btn twitter">Twitter</a>
+                <a href="#" id="shareTelegram" target="_blank" class="share-btn telegram">Telegram</a>
+            </div>
+            <button id="closeModalBtnBottom" class="modal-close-btn">Close</button>
+        </div>
+    </div>
+
+
+    <div class="stats">
+        <div class="stat">
+            <span class="label">Time</span>
+            <span class="value curr_time">30s</span>
+        </div>
+        <div class="stat">
+            <span class="label">Errors</span>
+            <span class="value curr_errors">0</span>
+        </div>
+        <div class="stat">
+            <span class="label">Accuracy</span>
+            <span class="value curr_accuracy">100%</span>
+        </div>
+        <div class="stat">
+            <span class="label">WPM</span>
+            <span class="value curr_wpm">0</span>
+        </div>
+    </div>
+
+    <div class="quote">Success is the sum of small efforts, repeated day in and day out.</div>
+    <textarea class="input_area" placeholder="Start typing here..."></textarea>
+
+    <button class="restart_btn" onclick="restartGame()" style="display: none;">Restart</button>
+</div>
+
+<script src="game.js"></script>
+<script>
+    // Переключение темной и светлой темы
+    function toggleTheme() {
+        const body = document.body;
+        body.classList.toggle('dark-theme');
+        body.classList.toggle('light-theme');
+        const themeIcon = document.querySelector('.theme-toggle');
+        themeIcon.textContent = body.classList.contains('dark-theme') ? '🌕' : '🌙';
+    }
+
+    // Переключение языка интерфейса
+    function toggleInterfaceLanguage() {
+        const currentLanguage = document.querySelector('.language-toggle').textContent;
+        const newLanguage = currentLanguage === 'ru' ? 'en' : 'ru';
+        document.querySelector('.language-toggle').textContent = newLanguage;
+        changeLanguage(); // Обновление языка интерфейса
+    }
+
+    // Функция для изменения времени
+    function changeTime() {
+        const selectedTime = document.getElementById('time').value;
+        document.querySelector('.curr_time').textContent = selectedTime + 's';
+        // Дополнительная логика для настройки времени игры
+    }
+
+    // Функция для изменения языка в интерфейсе
+    function changeLanguage() {
+        const language = document.getElementById('language').value;
+        if (language === 'ru') {
+            document.querySelector('.heading').textContent = 'Тест на скорость набора текста';
+            document.querySelector('.quote').textContent = 'Успех — это сумма маленьких усилий, повторяющихся день за днем.';
+            document.querySelector('.label[for="time"]').textContent = 'Время';
+            document.querySelector('.label[for="language"]').textContent = 'Язык';
+            document.querySelector('.label').textContent = 'Ошибки';
+            document.querySelector('.curr_accuracy').previousElementSibling.textContent = 'Точность';
+            document.querySelector('.curr_wpm').previousElementSibling.textContent = 'Слова в минуту';
+            document.querySelector('.restart_btn').textContent = 'Перезапуск';
+        } else {
+            document.querySelector('.heading').textContent = 'Speed Typing Test';
+            document.querySelector('.quote').textContent = 'Success is the sum of small efforts, repeated day in and day out.';
+            document.querySelector('.label[for="time"]').textContent = 'Time';
+            document.querySelector('.label[for="language"]').textContent = 'Language';
+            document.querySelector('.label').textContent = 'Errors';
+            document.querySelector('.curr_accuracy').previousElementSibling.textContent = 'Accuracy';
+            document.querySelector('.curr_wpm').previousElementSibling.textContent = 'WPM';
+            document.querySelector('.restart_btn').textContent = 'Restart';
+        }
+    }
+
+</script>
+</body>
+</html>

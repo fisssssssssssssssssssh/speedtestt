@@ -1,0 +1,392 @@
+:root {
+    --container-bg-light: #fff;
+    --container-bg-dark: #333;
+    --text-color-light: #333;
+    --text-color-dark: #fdf6e3;
+    --quote-bg-light: #f0f0f0;
+    --quote-bg-dark: #555;
+    --input-bg-light: #fff;
+    --input-bg-dark: #333;
+    --border-light: #ccc;
+    --border-dark: #bbb;
+    --button-bg-light: #4caf50;
+    --button-bg-dark: #45a049;
+    --button-hover-bg-light: #45a049;
+    --button-hover-bg-dark: #3e8e41;
+}
+
+body {
+    background-color: #fdf6e3;
+    color: var(--text-color-light);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.light-theme {
+    --container-bg: var(--container-bg-light);
+    --text-color: var(--text-color-light);
+    --quote-bg: var(--quote-bg-light);
+    --input-bg: var(--input-bg-light);
+    --border: var(--border-light);
+    --button-bg: var(--button-bg-light);
+}
+
+body.dark-theme {
+    --container-bg: var(--container-bg-dark);
+    --text-color: var(--text-color-dark);
+    --quote-bg: var(--quote-bg-dark);
+    --input-bg: var(--input-bg-dark);
+    --border: var(--border-dark);
+    --button-bg: var(--button-bg-dark);
+    background-color: #2d2d2d;
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 25px;
+    background: var(--container-bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.heading {
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    color: var(--text-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.settings {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.settings label {
+    font-size: 1.1rem;
+    margin-right: 8px;
+    color: var(--text-color);
+}
+
+.settings select {
+    font-size: 1.1rem;
+    padding: 8px;
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--text-color);
+    transition: border-color 0.3s;
+}
+
+.settings select:focus {
+    border-color: #4caf50;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.label {
+    display: block;
+    font-size: 1rem;
+    color: #888;
+}
+
+.value {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.quote {
+    margin: 20px 0;
+    padding: 15px;
+    background: var(--quote-bg);
+    border-radius: 5px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    text-align: justify;
+}
+
+.input_area {
+    width: 100%;
+    height: 120px;
+    padding: 12px;
+    font-size: 1.2rem;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    resize: none;
+    transition: border-color 0.3s;
+}
+
+.input_area:focus {
+    outline: none;
+    border-color: #4caf50;
+}
+
+.restart_btn {
+    margin-top: 25px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    color: #fff;
+    background: var(--button-bg);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.restart_btn:hover {
+    background: var(--button-hover-bg-light);
+    transform: scale(1.05);
+}
+
+.restart_btn.dark-theme:hover {
+    background: var(--button-hover-bg-dark);
+}
+
+.language-toggle,
+.theme-toggle {
+    position: absolute;
+    top: 15px;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: inherit;
+    z-index: 10;
+}
+
+.language-toggle {
+    right: 80px;
+}
+
+.theme-toggle {
+    right: 15px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .heading {
+        font-size: 1.9rem;
+    }
+
+    .settings {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .settings select {
+        font-size: 1rem;
+        width: 150px;
+    }
+
+    .stats {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat {
+        margin-bottom: 12px;
+    }
+
+    .input_area {
+        font-size: 1rem;
+    }
+
+    .restart_btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    /* Стили для модального окна */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7); /* Темный фон с более интенсивной прозрачностью */
+        backdrop-filter: blur(4px); /* Добавление размытия фона */
+    }
+    .modal.show {
+        display: block;
+    }
+
+    .modal-content {
+        background: linear-gradient(145deg, #ffffff, #e6e6e6); /* Лёгкий градиент для объёма */
+        margin: 5% auto;
+        padding: 30px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 500px; /* Ограничение ширины */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Глубокая тень */
+        text-align: center;
+        font-family: 'Roboto', Arial, sans-serif; /* Используем более современный шрифт */
+        position: relative;
+        animation: fadeIn 0.4s ease-in-out; /* Анимация появления */
+    }
+
+    .modal h2 {
+        color: #222;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    .results p {
+        font-size: 1.2rem;
+        margin: 15px 0;
+        color: #555;
+    }
+
+    .result-value {
+        font-weight: bold;
+        color: #2b7a78;
+        font-size: 1.4rem;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 1.5rem;
+        color: #999;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .close-btn:hover {
+        color: #333;
+    }
+
+    .share-buttons {
+        margin: 20px 0;
+    }
+
+    .share-buttons p {
+        margin-bottom: 10px;
+        color: #444;
+        font-size: 1rem;
+    }
+
+    .share-btn {
+        display: inline-block;
+        margin: 5px 10px;
+        padding: 10px 15px;
+        font-size: 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 500;
+        transition: transform 0.2s, opacity 0.3s;
+    }
+
+    .share-btn.twitter {
+        background-color: #1DA1F2; /* Цвет Twitter */
+    }
+
+    .share-btn.telegram {
+        background-color: #0088CC; /* Цвет Telegram */
+    }
+
+    .share-btn:hover {
+        opacity: 0.9;
+        transform: scale(1.05); /* Лёгкое увеличение при наведении */
+    }
+
+    .modal-close-btn {
+        margin-top: 20px;
+        background: #222;
+        color: #fff;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .modal-close-btn:hover {
+        background: #444;
+        transform: scale(1.05); /* Лёгкое увеличение при наведении */
+    }
+
+    /* Анимация появления модального окна */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .auth-container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #f4f4f4;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .auth-container h2 {
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+
+    .auth-container input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .auth-container button {
+        width: 100%;
+        padding: 10px;
+        background: #4caf50;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .auth-container button:hover {
+        background: #45a049;
+    }
+
+
+}
